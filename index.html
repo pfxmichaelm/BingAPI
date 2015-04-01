@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <link rel="stylesheet" href="css/style.css">
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="js/app.js"></script>
+      <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+   </head>
+
+   <body>
+      <div id='mapDiv' style="position:relative; width:1000px; height:1000px;"></div>
+      <form class="getInput" onsubmit="return false">
+        Begin: <input type="text" placeholder="place name or address" name="from" size="50" required><br>
+        Destination: <input type="text" placeholder="place name or address" name="to" size="50" required><br>
+        <input type="submit" value="Submit">
+      </form>       
+   </body>
+</html>
