@@ -8,7 +8,7 @@ $(document).ready( function() {
     $('form').submit( function(event) {
     	from = $(this).find("input[name='from']").val();
     	to = $(this).find("input[name='to']").val();
-    	loadDirMod(from, to);
+    	loadDirMod();
     });
 
     GetMap();
@@ -22,18 +22,19 @@ $(document).ready( function() {
         map = new Microsoft.Maps.Map(document.getElementById("mapDiv"),{credentials:"AjAy6KaXrp60YctWqivsjNNd9i63nGKCrJuqR7VrBHRRJ8viGq2PH8uCmAm1hLi4"});
     };
 
-    function loadDirMod(from, to) {
-    	console.log('From: ' + from + ' To: ' + to);
+    function loadDirMod() {
         Microsoft.Maps.loadModule('Microsoft.Maps.Directions', { callback: directionsModuleLoaded });
+        //Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function() { directionsModuleLoaded(from, to);
+        //});
     };
 
-    function directionsModuleLoaded(from, to) {
+    function directionsModuleLoaded() {
+        console.log('From: ' + from + ' To: ' + to);
 
         // Initialize the DirectionsManager
         directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
 
         // Create start and end waypoints
-        console.log('From: ' + from + 'To: ' + to);
         //var startWaypoint = new Microsoft.Maps.Directions.Waypoint({address:"Hidden Spings, ID"}); 
         //var endWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: "Austin, TX" } );
 
