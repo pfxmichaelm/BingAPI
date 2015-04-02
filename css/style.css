@@ -1,9 +1,19 @@
-form {
-	position: absolute;
+.getInput {
+	position: relative;
 	left: 20px;
-	bottom: 30px;
-	z-index: 3
-	width: 100px;
-	height:  100px;
-	background-color: white;
+	bottom: 130px;
+	z-index: 3;
+	width: 350px;
+	height: auto;
+	background-color: #FEFFC9; 
+	padding: 10px;
+	font-size: 18px;
+	border-style: ridge;
+	border-width: 3px;
+}
+input.button {
+	margin-top: 5px;
+}
+#itineraryDiv {
+	margin-top: -100px;
 }

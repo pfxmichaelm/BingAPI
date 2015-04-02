@@ -9,18 +9,29 @@ $(document).ready( function() {
     	from = $(this).find("input[name='from']").val();
     	to = $(this).find("input[name='to']").val();
     	directionsModuleLoaded(from, to);
+    	clearRouteDirections();
     });
 
     GetMap();
 
 });
 
+	function clearRouteDirections() {
+        $("input[name='to']").on("input", function() {
+            directionsManager.clearDisplay();
+            directionsManager.resetDirections();
+        });
+    };
+
     function GetMap() {
         // Initialize the map
         //map = new Microsoft.Maps.Map(document.getElementById("mapDiv"),{credentials:"AjAy6KaXrp60YctWqivsjNNd9i63nGKCrJuqR7VrBHRRJ8viGq2PH8uCmAm1hLi4"});
         //Microsoft.Maps.loadModule('Microsoft.Maps.Directions', { callback: directionsModuleLoaded });
-        map = new Microsoft.Maps.Map(document.getElementById("mapDiv"),{credentials:"AjAy6KaXrp60YctWqivsjNNd9i63nGKCrJuqR7VrBHRRJ8viGq2PH8uCmAm1hLi4"});
+        var options = {credentials: "AjAy6KaXrp60YctWqivsjNNd9i63nGKCrJuqR7VrBHRRJ8viGq2PH8uCmAm1hLi4", center: new Microsoft.Maps.Location(45.5, -115.7), zoom: 6, customizeOverlays: true}
+        map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), options);
+        //Microsoft.Maps.loadModule('Microsoft.Maps.Themes.BingTheme');
         Microsoft.Maps.loadModule('Microsoft.Maps.Directions');
+        Microsoft.Maps.loadModule('Microsoft.Maps.Overlays.Style');
     };
 
     //function loadDirMod() {
@@ -35,10 +46,13 @@ $(document).ready( function() {
         // Initialize the DirectionsManager
         directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
 
+
+
         // Create start and end waypoints
         //var startWaypoint = new Microsoft.Maps.Directions.Waypoint({address:"Hidden Spings, ID"}); 
         //var endWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: "Austin, TX" } );
-        var startWaypoint = new Microsoft.Maps.Directions.Waypoint({address: from }); 
+        var startWaypoint = new Microsoft.Maps.Directions.Waypoint({address: from });
+        //var viaWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: "1 Microsoft Way, Redmond, WA" , isViapoint: true }); 
         var endWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: to });
 
         directionsManager.addWaypoint(startWaypoint);
