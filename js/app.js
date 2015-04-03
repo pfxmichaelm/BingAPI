@@ -34,18 +34,11 @@ $(document).ready( function() {
         Microsoft.Maps.loadModule('Microsoft.Maps.Overlays.Style');
     };
 
-    //function loadDirMod() {
-    //    Microsoft.Maps.loadModule('Microsoft.Maps.Directions', { callback: directionsModuleLoaded });
-        //Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function() { directionsModuleLoaded(from, to);
-        //});
-    //};
-
     function directionsModuleLoaded(from, to) {
         console.log('From: ' + from + ' To: ' + to);
 
         // Initialize the DirectionsManager
         directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-
 
 
         // Create start and end waypoints
@@ -82,7 +75,6 @@ $(document).ready( function() {
     };
 
      
-
     function SelectFirstDisambiguationResult() {
         var results = "";
 
