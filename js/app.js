@@ -17,7 +17,7 @@ $(document).ready( function() {
 });
 
 	function clearRouteDirections() {
-        $("input[name='to']").on("input", function() {
+        $("input[name='to'], input[name='from']").on("input", function() {
             directionsManager.clearDisplay();
             directionsManager.resetDirections();
         });
@@ -59,7 +59,7 @@ $(document).ready( function() {
         directionsManager.addWaypoint(endWaypoint);
 
         // Set the id of the div to use to display the directions
-        directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('itineraryDiv') });
+        directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('directionsDiv') });
 
         // Specify a handler for when an error occurs
         Microsoft.Maps.Events.addHandler(directionsManager, 'directionsError', displayError);
