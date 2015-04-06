@@ -6,20 +6,27 @@ $(document).ready( function() {
     var to = "";
 
     $('form').submit( function(event) {
+    	rtOpt = $(this).find("input[name='rtOpt']:checked").val();
+    	traffic = $(this).find("input[name='traffic']:checked").val();
     	from = $(this).find("input[name='from']").val();
     	to = $(this).find("input[name='to']").val();
+    	console.log(rtOpt + "--" + traffic)
     	directionsModuleLoaded(from, to);
-    	clearRouteDirections();
+    	clearRouteDirections(from, to, rtOpt, traffic);
     });
 
     GetMap();
 
 });
 
-	function clearRouteDirections() {
+	function clearRouteDirections(from, to, rtOpt, traffic) {
         $("input[name='to'], input[name='from']").on("input", function() {
             directionsManager.clearDisplay();
             directionsManager.resetDirections();
+        });
+        $("input[name='rtOpt'], input[name='traffic']").change( function() {
+            directionsManager.clearDisplay();
+            directionsManager.resetDirections();        	
         });
     };
 
@@ -34,7 +41,7 @@ $(document).ready( function() {
         Microsoft.Maps.loadModule('Microsoft.Maps.Overlays.Style');
     };
 
-    function directionsModuleLoaded(from, to) {
+    function directionsModuleLoaded(from, to, rtOpt, traffic) {
         console.log('From: ' + from + ' To: ' + to);
 
         // Initialize the DirectionsManager
@@ -50,6 +57,9 @@ $(document).ready( function() {
 
         directionsManager.addWaypoint(startWaypoint);
         directionsManager.addWaypoint(endWaypoint);
+
+        // Set request options
+        directionsManager.setRequestOptions({ avoidTraffic: traffic, routeOptimization: Microsoft.Maps.Directions.RouteOptimization.rtOpt});
 
         // Set the id of the div to use to display the directions
         directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('directionsDiv') });
