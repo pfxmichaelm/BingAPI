@@ -4,29 +4,28 @@ $(document).ready( function() {
     var directionsManager = null;
     var from = "";
     var to = "";
+    var geoLocationProvider = null;
+    var point = "";
+    var loc = "";
 
     $('form').submit( function(event) {
-    	rtOpt = $(this).find("input[name='rtOpt']:checked").val();
-    	traffic = $(this).find("input[name='traffic']:checked").val();
     	from = $(this).find("input[name='from']").val();
     	to = $(this).find("input[name='to']").val();
-    	console.log(rtOpt + "--" + traffic)
     	directionsModuleLoaded(from, to);
-    	clearRouteDirections(from, to, rtOpt, traffic);
-    });
+    	clearRouteDirections();
+    });    
 
-    GetMap();
+    GetMap(); 
+    //weather(loc);   
 
 });
 
-	function clearRouteDirections(from, to, rtOpt, traffic) {
+
+
+	function clearRouteDirections() {
         $("input[name='to'], input[name='from']").on("input", function() {
             directionsManager.clearDisplay();
             directionsManager.resetDirections();
-        });
-        $("input[name='rtOpt'], input[name='traffic']").change( function() {
-            directionsManager.clearDisplay();
-            directionsManager.resetDirections();        	
         });
     };
 
@@ -39,9 +38,59 @@ $(document).ready( function() {
         //Microsoft.Maps.loadModule('Microsoft.Maps.Themes.BingTheme');
         Microsoft.Maps.loadModule('Microsoft.Maps.Directions');
         Microsoft.Maps.loadModule('Microsoft.Maps.Overlays.Style');
+        Microsoft.Maps.Events.addHandler(map, 'click', displayEventInfo);
+
+        // Initialize the location provider
+        //geoLocationProvider = new Microsoft.Maps.GeoLocationProvider(map);        
+        //geoLocation();
+
+        //http://api.wunderground.com/api/15855692ccbbd2e6/animatedradar/q/ID/Boise.gif?newmaps=0&timelabel=1&timelabel.y=10&num=5&delay=50;
     };
 
-    function directionsModuleLoaded(from, to, rtOpt, traffic) {
+    function displayEventInfo(e) {
+        if (e.targetType == "map") {
+            point = new Microsoft.Maps.Point(e.getX(), e.getY());
+            loc = e.target.tryPixelToLocation(point);
+            //document.getElementById("textBox").value = loc.latitude + ", " + loc.longitude;
+            weather(loc);
+
+        };
+    };
+
+    function capitalize(str) {
+        strVal = '';
+        str = str.split(' ');
+        for (var chr = 0; chr < str.length; chr++) {
+            strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
+        }
+        return strVal
+    };    
+
+    function weather(loc) {
+    	lat = loc.latitude.toFixed(5);
+    	lon = loc.longitude.toFixed(5);
+    	position = lat + "," + lon;
+    	console.log(position);
+		$.ajax({
+		//url : "http://api.wunderground.com/api/15855692ccbbd2e6/forecast/q/ID/Boise.json",
+  		url : "http://api.aerisapi.com/observations/closest?p=" + lat + "," + lon + "&client_id=Qx5JEdETofhBL8kjLqmxY&client_secret=2TMjswWFZD1f1bDU0xgBQAcCWbuaZZcdOBdaKspa",
+  		dataType : "jsonp",
+  		success : function(parsed_json) {
+  		//var location = parsed_json['location']['city'];
+  		console.log(parsed_json)
+  		var weather = parsed_json['response'][0]['ob']['weather'];
+  		var tempF = parsed_json['response'][0]['ob']['tempF'];
+  		var place = parsed_json['response'][0]['place']['name'];
+  		place = capitalize(place);
+  		//var fCast = parsed_json['forecast']['txt_forecast']['forecastday'][0]['fcttext'];
+  		//var temp_f = parsed_json['current_observation']['temp_f'];
+  		//alert("Current temperature in " + location + " is: " + temp_f);
+  		console.log("Nearest Weather Station: " + place + " - Current Temp & Condition: " + tempF + "F and " + weather)
+  		}
+  		});    	
+    };
+
+    function directionsModuleLoaded(from, to) {
         console.log('From: ' + from + ' To: ' + to);
 
         // Initialize the DirectionsManager
@@ -59,7 +108,7 @@ $(document).ready( function() {
         directionsManager.addWaypoint(endWaypoint);
 
         // Set request options
-        directionsManager.setRequestOptions({ avoidTraffic: traffic, routeOptimization: Microsoft.Maps.Directions.RouteOptimization.rtOpt});
+        //directionsManager.setRequestOptions({ avoidTraffic: traffic, routeOptimization: Microsoft.Maps.Directions.RouteOptimization.rtOpt});
 
         // Set the id of the div to use to display the directions
         directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('directionsDiv') });
