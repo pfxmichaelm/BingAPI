@@ -85,7 +85,7 @@ $(document).ready( function() {
   		//var fCast = parsed_json['forecast']['txt_forecast']['forecastday'][0]['fcttext'];
   		//var temp_f = parsed_json['current_observation']['temp_f'];
   		//alert("Current temperature in " + location + " is: " + temp_f);
-  		console.log("Nearest Weather Station: " + place + " - Current Temp & Condition: " + tempF + "F and " + weather)
+  		console.log("Nearest Weather Station: " + place + " - Current Temp & Conditions: " + tempF + "F and " + weather)
   		}
   		});    	
     };
