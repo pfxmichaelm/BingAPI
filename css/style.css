@@ -14,7 +14,10 @@
 input.button {
 	margin-top: 5px;
 }
-
+[type=search] {
+	color: blue;
+	margin: 5px;
+}
 #itineraryDiv {
 	margin-top: -100px;
 }
@@ -34,7 +37,7 @@ input.button {
 	pointer-events: none;
 }
 .modalDialog:target {
-	opacity: 1;
+	opacity: 0;
 	pointer-events: auto;
 }
 .modalDialog > div {
@@ -47,4 +50,25 @@ input.button {
 	background: -moz-linear-gradient(#fff, #999);
 	background: -webkit-linear-gradient(#fff, #999);
 	background: -o-linear-gradient(#fff, #999);
+}
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius; 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+	background: #00d9ff;
 }

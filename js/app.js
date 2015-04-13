@@ -78,17 +78,24 @@ $(document).ready( function() {
   		success : function(parsed_json) {
   		//var location = parsed_json['location']['city'];
   		console.log(parsed_json)
+  		var html = "";
   		var weather = parsed_json['response'][0]['ob']['weather'];
   		var tempF = parsed_json['response'][0]['ob']['tempF'];
   		var place = parsed_json['response'][0]['place']['name'];
   		place = capitalize(place);
-  		//var fCast = parsed_json['forecast']['txt_forecast']['forecastday'][0]['fcttext'];
-  		//var temp_f = parsed_json['current_observation']['temp_f'];
-  		//alert("Current temperature in " + location + " is: " + temp_f);
-  		console.log("Nearest Weather Station: " + place + " - Current Temp & Conditions: " + tempF + "F and " + weather)
-  		}
-  		});    	
+  		console.log("Nearest Weather Station: " + place + " - Current Temp & Conditions: " + tempF + "F and " + weather);
+  		html += 'Station: ' + place + ' Condition: ' + tempF + 'F & ' + weather;
+  		$('#results').html(html);
+      }
+  		});   	
     };
+
+    $('#from-ajax').click(function(event) {
+      event.preventDefault();
+      $.get(this.href, function(html) {
+        $(html).appendTo('#results').modal();
+      });
+    });
 
     function directionsModuleLoaded(from, to) {
         console.log('From: ' + from + ' To: ' + to);

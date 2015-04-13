@@ -20,12 +20,15 @@
         <input class="button" type="submit" value="Submit">
       </form>
       <div id='directionsDiv' style="position:relative; width:400px;"></div>
-      <a href="#openModal">Open Modal</a>
+
+      <a href="#openModal" id="from-ajax">Show Weather</a>
       <div id="openModal" class="modalDialog">
          <div>
             <a href="#close" title="Close" class="close">X</a>
-            <h2>Modal Box</h2>
-            <p></p>
+            <h2>Weather</h2>
+            <div id="results" class="modal">
+               <p></p>
+            </div>
          </div>
       </div>
    </body>
