@@ -20,14 +20,12 @@ $(document).ready( function() {
 
 });
 
-
-
 	function clearRouteDirections() {
         $("input[name='to'], input[name='from']").on("input", function() {
             directionsManager.clearDisplay();
             directionsManager.resetDirections();
         });
-    };
+  };
 
     function GetMap() {
         // Initialize the map
@@ -85,15 +83,16 @@ $(document).ready( function() {
   		place = capitalize(place);
   		console.log("Nearest Weather Station: " + place + " - Current Temp & Conditions: " + tempF + "F and " + weather);
   		html += 'Station: ' + place + ' Condition: ' + tempF + 'F & ' + weather;
-  		$('#results').html(html);
+  		$('.modal').html(html);
       }
   		});   	
     };
 
     $('#from-ajax').click(function(event) {
       event.preventDefault();
+      console.log(html);
       $.get(this.href, function(html) {
-        $(html).appendTo('#results').modal();
+        $(html).appendTo('body').modal();
       });
     });
 

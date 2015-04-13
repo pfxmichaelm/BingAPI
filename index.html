@@ -21,15 +21,15 @@
       </form>
       <div id='directionsDiv' style="position:relative; width:400px;"></div>
 
-      <a href="#openModal" id="from-ajax">Show Weather</a>
+      <a href="#openModal" id="from-ajax" rel="modal:open">Show Weather</a>
       <div id="openModal" class="modalDialog">
          <div>
             <a href="#close" title="Close" class="close">X</a>
             <h2>Weather</h2>
-            <div id="results" class="modal">
-               <p></p>
-            </div>
          </div>
+      <div class="modal">
+         <p>conditions</p>
+      </div>
       </div>
    </body>
 </html>
