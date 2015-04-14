@@ -9,10 +9,10 @@ $(document).ready( function() {
     var loc = "";
 
     $('form').submit( function(event) {
-    	from = $(this).find("input[name='from']").val();
-    	to = $(this).find("input[name='to']").val();
-    	directionsModuleLoaded(from, to);
-    	clearRouteDirections();
+      from = $(this).find("input[name='from']").val();
+      to = $(this).find("input[name='to']").val();
+      directionsModuleLoaded(from, to);
+      clearRouteDirections();
     });    
 
     GetMap(); 
@@ -20,7 +20,7 @@ $(document).ready( function() {
 
 });
 
-	function clearRouteDirections() {
+  function clearRouteDirections() {
         $("input[name='to'], input[name='from']").on("input", function() {
             directionsManager.clearDisplay();
             directionsManager.resetDirections();
@@ -65,35 +65,35 @@ $(document).ready( function() {
     };    
 
     function weather(loc) {
-    	lat = loc.latitude.toFixed(5);
-    	lon = loc.longitude.toFixed(5);
-    	position = lat + "," + lon;
-    	console.log(position);
-		$.ajax({
-		//url : "http://api.wunderground.com/api/15855692ccbbd2e6/forecast/q/ID/Boise.json",
-  		url : "http://api.aerisapi.com/observations/closest?p=" + lat + "," + lon + "&client_id=Qx5JEdETofhBL8kjLqmxY&client_secret=2TMjswWFZD1f1bDU0xgBQAcCWbuaZZcdOBdaKspa",
-  		dataType : "jsonp",
-  		success : function(parsed_json) {
-  		//var location = parsed_json['location']['city'];
-  		console.log(parsed_json)
-  		var html = "";
-  		var weather = parsed_json['response'][0]['ob']['weather'];
-  		var tempF = parsed_json['response'][0]['ob']['tempF'];
-  		var place = parsed_json['response'][0]['place']['name'];
-  		place = capitalize(place);
-  		console.log("Nearest Weather Station: " + place + " - Current Temp & Conditions: " + tempF + "F and " + weather);
-  		html += 'Station: ' + place + ' Condition: ' + tempF + 'F & ' + weather;
-  		$('.modal').html(html);
+      lat = loc.latitude.toFixed(5);
+      lon = loc.longitude.toFixed(5);
+      position = lat + "," + lon;
+      console.log(position);
+    $.ajax({
+    //url : "http://api.wunderground.com/api/15855692ccbbd2e6/forecast/q/ID/Boise.json",
+      url : "http://api.aerisapi.com/observations/closest?p=" + lat + "," + lon + "&client_id=Qx5JEdETofhBL8kjLqmxY&client_secret=2TMjswWFZD1f1bDU0xgBQAcCWbuaZZcdOBdaKspa",
+      dataType : "jsonp",
+      success : function(parsed_json) {
+      //var location = parsed_json['location']['city'];
+      console.log(parsed_json)
+      var html = "";
+      var weather = parsed_json['response'][0]['ob']['weather'];
+      var tempF = parsed_json['response'][0]['ob']['tempF'];
+      var place = parsed_json['response'][0]['place']['name'];
+      place = capitalize(place);
+      console.log("Nearest Weather Station: " + place + " - Current Temp & Conditions: " + tempF + "F and " + weather);
+      html += 'Station: ' + place + ' Condition: ' + tempF + 'F & ' + weather;
+      $('.modal').html(html);
       }
-  		});   	
+      });     
     };
 
-    $('#from-ajax').click(function(event) {
+    $('#openModal').on(function(event) {
       event.preventDefault();
       console.log(html);
-      $.get(this.href, function(html) {
-        $(html).appendTo('body').modal();
-      });
+      //$.get(this.p, function(html) {
+        $(html).appendTo('p').modalDialog();
+      //});
     });
 
     function directionsModuleLoaded(from, to) {
