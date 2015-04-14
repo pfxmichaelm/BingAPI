@@ -51,7 +51,6 @@ $(document).ready( function() {
             loc = e.target.tryPixelToLocation(point);
             //document.getElementById("textBox").value = loc.latitude + ", " + loc.longitude;
             weather(loc);
-
         };
     };
 
@@ -64,18 +63,18 @@ $(document).ready( function() {
         return strVal
     };    
 
-    function weather(loc) {
-      lat = loc.latitude.toFixed(5);
-      lon = loc.longitude.toFixed(5);
-      position = lat + "," + lon;
-      console.log(position);
+  function weather(loc) {
+    lat = loc.latitude.toFixed(5);
+    lon = loc.longitude.toFixed(5);
+    position = lat + "," + lon;
+    console.log(position);
     $.ajax({
-    //url : "http://api.wunderground.com/api/15855692ccbbd2e6/forecast/q/ID/Boise.json",
+      //url : "http://api.wunderground.com/api/15855692ccbbd2e6/forecast/q/ID/Boise.json",
       url : "http://api.aerisapi.com/observations/closest?p=" + lat + "," + lon + "&client_id=Qx5JEdETofhBL8kjLqmxY&client_secret=2TMjswWFZD1f1bDU0xgBQAcCWbuaZZcdOBdaKspa",
       dataType : "jsonp",
       success : function(parsed_json) {
       //var location = parsed_json['location']['city'];
-      console.log(parsed_json)
+      console.log(parsed_json);
       var html = "";
       var weather = parsed_json['response'][0]['ob']['weather'];
       var tempF = parsed_json['response'][0]['ob']['tempF'];
@@ -83,18 +82,21 @@ $(document).ready( function() {
       place = capitalize(place);
       console.log("Nearest Weather Station: " + place + " - Current Temp & Conditions: " + tempF + "F and " + weather);
       html += 'Station: ' + place + ' Condition: ' + tempF + 'F & ' + weather;
-      $('.modal').html(html);
+      console.log(html);
+      $('#modal').html(html);
+      $('#weatherModal').click();
+      $('#weatherModal').removeClass('weather-off').addClass('weather-on');      
       }
-      });     
-    };
+    });     
+  };
 
-    $('#openModal').on(function(event) {
+/*    $('#openModal').on(function(event) {
       event.preventDefault();
       console.log(html);
       //$.get(this.p, function(html) {
         $(html).appendTo('p').modalDialog();
       //});
-    });
+    });*/
 
     function directionsModuleLoaded(from, to) {
         console.log('From: ' + from + ' To: ' + to);

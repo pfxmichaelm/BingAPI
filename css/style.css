@@ -37,7 +37,7 @@ input.button {
 	pointer-events: none;
 }
 .modalDialog:target {
-	opacity: 0;
+	opacity: 1;
 	pointer-events: auto;
 }
 .modalDialog > div {
@@ -71,4 +71,10 @@ input.button {
 }
 .close:hover {
 	background: #00d9ff;
+}
+.weather-off {
+	display: none;
+}
+.weather-on {
+
 }
