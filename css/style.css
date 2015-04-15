@@ -25,7 +25,7 @@ input.button {
 	margin: 5px;
 }
 #itineraryDiv {
-	margin-top: -100px;
+	margin-top: -200px;
 }
 .modalDialog {
 	position: fixed;
@@ -54,6 +54,8 @@ input.button {
 	margin: 10% auto;
 	padding: 5px 20px 13px 20px;
 	border-radius: 10px;
+	border-width: 2px;
+	border-color: black;
 	background: #fff;
 	background: -moz-linear-gradient(#fff, #999);
 	background: -webkit-linear-gradient(#fff, #999);
@@ -79,6 +81,9 @@ input.button {
 }
 .close:hover {
 	background: #00d9ff;
+}
+#weatherModal {
+	display: none;
 }
 .weather-off {
 	display: none;

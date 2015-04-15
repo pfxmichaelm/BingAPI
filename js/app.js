@@ -51,7 +51,8 @@ $(document).ready( function() {
             point = new Microsoft.Maps.Point(e.getX(), e.getY());
             loc = e.target.tryPixelToLocation(point);
             //document.getElementById("textBox").value = loc.latitude + ", " + loc.longitude;
-            weather(loc);
+            //weather(loc);
+            wunderground(loc);
         };
     };
 
@@ -87,10 +88,34 @@ $(document).ready( function() {
       $('#modal').html(html);
       //$('#weatherModal').click();
       document.getElementById('weatherModal').click();
-      $('#weatherModal').removeClass('weather-off').addClass('weather-on');      
+      //$('#weatherModal').removeClass('weather-off').addClass('weather-on');      
       }
     });     
   };
+
+    function wunderground (loc) {
+      lat = loc.latitude.toFixed(5);
+      lon = loc.longitude.toFixed(5);
+      position = lat + "," + lon;
+      console.log(position);
+      $.ajax({
+        //url: "http://api.wunderground.com/api/15855692ccbbd2e6/geolookup/conditions/q/43.62157,-112.18438.json",
+        url: "http://api.wunderground.com/api/15855692ccbbd2e6/geolookup/conditions/q/" + lat + "," + lon + ".json",
+        dataType : "jsonp",
+        success : function(parsed_json) {
+          console.log(parsed_json);
+          var html = "";
+          var weather = parsed_json['current_observation']['weather'];
+          var winds = parsed_json['current_observation']['wind_string'];
+          var tempF = parsed_json['current_observation']['temp_f'];
+          var place = parsed_json['current_observation']['observation_location']['city']
+          console.log('Place: ' + place + ' ' + tempF + 'F ' + weather + ', Winds: ' + winds);
+          html += place + ' - ' + tempF + 'F & ' + weather + ', Winds: ' + winds;
+          $('#modal').html(html);
+          document.getElementById('weatherModal').click();
+        }
+      });
+    };
 
     function directionsModuleLoaded(from, to) {
         console.log('From: ' + from + ' To: ' + to);
