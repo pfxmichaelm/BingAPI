@@ -15,13 +15,14 @@ $(document).ready( function() {
       clearRouteDirections();
     });    
 
-    GetMap(); 
+    GetMap();
     //weather(loc);   
 
 });
 
   function clearRouteDirections() {
-        $("input[name='to'], input[name='from']").on("input", function() {
+        $("input[name='to'], input[name='from']").change(function() {
+        //$("input[name='to'], input[name='from']").on("input", function() {
             directionsManager.clearDisplay();
             directionsManager.resetDirections();
         });
@@ -81,22 +82,15 @@ $(document).ready( function() {
       var place = parsed_json['response'][0]['place']['name'];
       place = capitalize(place);
       console.log("Nearest Weather Station: " + place + " - Current Temp & Conditions: " + tempF + "F and " + weather);
-      html += 'Station: ' + place + ' Condition: ' + tempF + 'F & ' + weather;
+      html += place + ' - ' + tempF + 'F & ' + weather;
       console.log(html);
       $('#modal').html(html);
-      $('#weatherModal').click();
+      //$('#weatherModal').click();
+      document.getElementById('weatherModal').click();
       $('#weatherModal').removeClass('weather-off').addClass('weather-on');      
       }
     });     
   };
-
-/*    $('#openModal').on(function(event) {
-      event.preventDefault();
-      console.log(html);
-      //$.get(this.p, function(html) {
-        $(html).appendTo('p').modalDialog();
-      //});
-    });*/
 
     function directionsModuleLoaded(from, to) {
         console.log('From: ' + from + ' To: ' + to);
