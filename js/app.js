@@ -13,20 +13,27 @@ $(document).ready( function() {
       to = $(this).find("input[name='to']").val();
       directionsModuleLoaded(from, to);
       clearRouteDirections();
+      wunderground_to(to);
     });    
 
     GetMap();
-    //weather(loc);   
+    //weather(loc);
+    show_splash();
 
 });
 
-  function clearRouteDirections() {
-        $("input[name='to'], input[name='from']").change(function() {
-        //$("input[name='to'], input[name='from']").on("input", function() {
-            directionsManager.clearDisplay();
-            directionsManager.resetDirections();
-        });
-  };
+    function show_splash() {
+      //document.getElementById('splashModal').style.display = 'block';
+      document.getElementById('splashModal').click();
+    };
+
+    function clearRouteDirections() {
+      $("input[name='to'], input[name='from']").change(function() {
+      //$("input[name='to'], input[name='from']").on("input", function() {
+          directionsManager.clearDisplay();
+          directionsManager.resetDirections();
+      });
+    };
 
     function GetMap() {
         // Initialize the map
@@ -65,7 +72,7 @@ $(document).ready( function() {
         return strVal
     };    
 
-  function weather(loc) {
+/*  function weather(loc) {
     lat = loc.latitude.toFixed(5);
     lon = loc.longitude.toFixed(5);
     position = lat + "," + lon;
@@ -91,7 +98,7 @@ $(document).ready( function() {
       //$('#weatherModal').removeClass('weather-off').addClass('weather-on');      
       }
     });     
-  };
+  };*/
 
     function wunderground (loc) {
       lat = loc.latitude.toFixed(5);
@@ -113,6 +120,16 @@ $(document).ready( function() {
           html += place + ' - ' + tempF + 'F & ' + weather + ', Winds: ' + winds;
           $('#modal').html(html);
           document.getElementById('weatherModal').click();
+        }
+      });
+    };
+
+    function wunderground_to (to) {
+      $.ajax({
+        url: "http://api.wunderground.com/api/15855692ccbbd2e6/geolookup/conditions/q/ID/" + to + ".json",
+        dataType: "jsonp",
+        success: function(parsed_json) {
+          console.log(parsed_json);
         }
       });
     };

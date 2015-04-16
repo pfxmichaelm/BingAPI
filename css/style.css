@@ -18,10 +18,15 @@
 }
 input.button {
 	margin-top: 5px;
-	background-color: orange;
+	color: white;
+	background-color: #606061;
+}
+
+input.button:hover {
+	background: #00d9ff;
 }
 [type=search] {
-	color: blue;
+	color: black;
 	margin: 5px;
 }
 #itineraryDiv {
@@ -61,6 +66,16 @@ input.button {
 	background: -webkit-linear-gradient(#fff, #999);
 	background: -o-linear-gradient(#fff, #999);
 }
+
+.weatherDialog > div {
+	left: -260px;
+	bottom: -435px;
+}
+
+.splashDialog > div {
+	left: -460px;
+	bottom: -100px;
+}
 .close {
 	background: #606061;
 	color: #FFFFFF;
@@ -85,9 +100,6 @@ input.button {
 #weatherModal {
 	display: none;
 }
-.weather-off {
+#splashModal {
 	display: none;
-}
-.weather-on {
-
 }

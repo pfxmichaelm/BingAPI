@@ -9,7 +9,7 @@
       <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
       <link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css">
-<script src="http://js.arcgis.com/3.13/"></script>
+      <script src="http://js.arcgis.com/3.13/"></script>
    </head>
 
    <body>
@@ -22,12 +22,22 @@
       <div id='directionsDiv' style="position:relative; width:400px;"></div>
 
       <a href="#openModal" id="weatherModal">Weather Modal</a>
-      <div id="openModal" class="modalDialog">
-         <div>
-            <a href="#close" title="Close" class="close">X</a>
-            <h3>Weather Station Info</h3>
-            <p id="modal">This is a sample modal box that can be created using the powers of CSS3.</p>
-         </div>
+      <div id="openModal" class="modalDialog weatherDialog">
+        <div>
+          <a href="#close" title="Close" class="close">X</a>
+          <h4>Weather Station Info</h4>
+          <p id="modal">This is a sample modal box that can be created using the powers of CSS3.</p>
+        </div>
+      </div>
+
+      <a href="#openSplashModal" id="splashModal">Splash Window</a>
+      <div id="openSplashModal" class="modalDialog splashDialog">
+        <div>
+          <div id="splash">
+            <a href="#close_splash" title="Close Splash" class="close">X</a>
+            <p>Simple mapping application based on MS Bing Maps API. A routing utility is provided to identify the shortest route between a begin and end destination. Additionally, the user may click on the map and retreive weather related information for the location clicked on.</p>
+          </div>
+        </div>
       </div>
    </body>
 </html>
