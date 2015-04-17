@@ -103,3 +103,13 @@ input.button:hover {
 #splashModal {
 	display: none;
 }
+
+#to_weather {
+	display: none;
+
+}
+
+#to_weather > p {
+	line-height: 15px;
+	padding-top: -120px;	
+}

@@ -125,11 +125,26 @@ $(document).ready( function() {
     };
 
     function wunderground_to (to) {
+      to_arrary = to.split(",");
+      city = capitalize(to_arrary[0]);
+      state = capitalize(to_arrary[1]);
+      console.log(city + '&' + state);
       $.ajax({
-        url: "http://api.wunderground.com/api/15855692ccbbd2e6/geolookup/conditions/q/ID/" + to + ".json",
+        url: "http://api.wunderground.com/api/15855692ccbbd2e6/geolookup/conditions/q/" + state + "/" + city + ".json",
         dataType: "jsonp",
         success: function(parsed_json) {
+          var weather = parsed_json['current_observation']['weather'];
+          var winds = parsed_json['current_observation']['wind_string'];
+          var tempF = parsed_json['current_observation']['temp_f'];          
           console.log(parsed_json);
+          console.log('wunderground_to');
+          htmlstr = "";
+          htmlstr += '<p>' + city + ' Weather' + '</p>';
+          htmlstr += '<p>' + tempF + 'F & ' + weather + ', Winds ' + winds + '</p>';
+          //$('#to_weather').html('<p>' + city + ' Weather' + '</p>');
+          //$('#to_weather').html('<p>' + tempF + 'F & ' + weather + ', Winds ' + winds + '</p>');
+          $('#to_weather').html(htmlstr);
+          $('#to_weather').show();
         }
       });
     };
