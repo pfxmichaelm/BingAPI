@@ -29,8 +29,8 @@ input.button:hover {
 	color: black;
 	margin: 5px;
 }
-#itineraryDiv {
-	margin-top: -200px;
+#directionsDiv {
+	margin-top: -100px;
 }
 .modalDialog {
 	position: fixed;
