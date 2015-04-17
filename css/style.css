@@ -113,3 +113,7 @@ input.button:hover {
 	line-height: 15px;
 	padding-top: -120px;	
 }
+
+#mapDiv {
+	cursor: pointer;
+}

@@ -46,6 +46,18 @@ $(document).ready( function() {
         Microsoft.Maps.loadModule('Microsoft.Maps.Overlays.Style');
         Microsoft.Maps.Events.addHandler(map, 'click', displayEventInfo);
 
+        Microsoft.Maps.Events.addHandler(map, "mousemove", function (e) {
+          // get the HTML DOM Element that represents the Map
+          var mapElem = map.getRootElement();
+          if (e.targetType === "map") {
+           // Mouse is over Map
+            mapElem.style.cursor = "crosshair";
+          } else {
+            // Mouse is over Pushpin, Polyline, Polygon
+            mapElem.style.cursor = "pointer";
+          }
+        });
+
         // Initialize the location provider
         //geoLocationProvider = new Microsoft.Maps.GeoLocationProvider(map);        
         //geoLocation();
